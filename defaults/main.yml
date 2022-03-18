@@ -88,7 +88,7 @@ firewalld:
 
 # FirewallD -> rules
 firewalld_rules:
-  logstash_port_5601:
+  logstash_port_5044:
     enabled: false
     zone: "public"
     state: "enabled"

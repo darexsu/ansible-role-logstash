@@ -100,7 +100,7 @@ Your vars [host_vars]  -->  default vars [current role] --> default vars [includ
         enabled: true
       # FirewallD -> rules
       firewalld_rules:
-        logstash_port_5601:
+        logstash_port_5044:
           enabled: true
 
   tasks:
@@ -280,7 +280,7 @@ Your vars [host_vars]  -->  default vars [current role] --> default vars [includ
       enabled: true
     # FirewallD -> rules
     firewalld_rules:
-      logstash_port_5601:
+      logstash_port_5044:
         enabled: true
         zone: "public"
         state: "enabled"
