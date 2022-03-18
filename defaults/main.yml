@@ -1,0 +1,96 @@
+---
+# Logstash
+logstash:
+  enabled: false
+  version: "8.x"
+  repo: "elastic"
+  service:
+    enabled: true
+    state: "started"
+
+# Logstash -> install
+logstash_install:
+  enabled: false
+  packages: ["logstash"]
+
+# Logstash -> config -> logstash.yml
+logstash_yml:
+  enabled: false
+  file: "logstash.yml"
+  src: "logstash_yml.j2"
+  backup: false
+  data:
+    path.data: /var/lib/logstash
+    path.logs: /var/log/logstash
+
+# Logstash -> config -> logstash.conf
+logstash_conf:
+  input_conf:
+    enabled: false
+    file: "input.conf"
+    src: "input_conf.j2"
+    backup: false
+    data:
+      port: '5044'
+  output_conf:
+    enabled: false
+    file: "output.conf"
+    src: "output_conf.j2"
+    backup: false
+    data:
+      hosts: '["http://localhost:9200"]'
+      index: '"%{[@metadata][beat]}-%{[@metadata][version]}-%{+YYYY.MM.dd}"'
+#     user: 'elastic'
+#     password: 'changeme'
+
+# ElasticSearch -> config -> jvm.options
+logstash_jvm_options:
+  enabled: false
+  file: "jvm.options"
+  src: "jvm_options.j2"
+  backup: false
+  data:
+    - "-Xms1g"
+    - "-Xmx1g"
+    - "11-13:-XX:+UseConcMarkSweepGC"
+    - "11-13:-XX:CMSInitiatingOccupancyFraction=75"
+    - "11-13:-XX:+UseCMSInitiatingOccupancyOnly"
+    - "-Djava.awt.headless=true"
+    - "-Dfile.encoding=UTF-8"
+    - "-Djruby.compile.invokedynamic=true"
+    - "-Djruby.jit.threshold=0"
+    - "-Djruby.regexp.interruptible=true"
+    - "-XX:+HeapDumpOnOutOfMemoryError"
+    - "-Djava.security.egd=file:/dev/urandom"
+    - "-Dlog4j2.isThreadContextMapInheritable=true"
+    - "11-:--add-opens=java.base/java.security=ALL-UNNAMED"
+    - "11-:--add-opens=java.base/java.io=ALL-UNNAMED"
+    - "11-:--add-opens=java.base/java.nio.channels=ALL-UNNAMED"
+    - "11-:--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"
+    - "11-:--add-opens=java.management/sun.management=ALL-UNNAMED"
+
+# Logstash -> constants
+logstash_const:
+  Debian:
+    dependencies: [apt-transport-https, gnupg2, ca-certificates, openjdk-11-jdk]
+    elastic:
+      repo: "deb https://artifacts.elastic.co/packages/{{ logstash.version }}/apt stable main"
+      gpg: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+  RedHat:
+    dependencies: [gnupg2, java-11-openjdk]
+    elastic:
+      repo: "https://artifacts.elastic.co/packages/{{ logstash.version }}/yum"
+      gpg: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+
+# FirewallD
+firewalld:
+  enabled: false
+
+# FirewallD -> rules
+firewalld_rules:
+  logstash_port_5601:
+    enabled: false
+    zone: "public"
+    state: "enabled"
+    port: "5044/tcp"
+    permanent: true

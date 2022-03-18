@@ -1,0 +1,10 @@
+---
+- name: configure logstash_yml
+  ansible.builtin.template:
+    src: "{{ logstash_yml.src }}"
+    dest: "/etc/logstash/{{ logstash_yml.file }}"
+    owner: root
+    group: root
+    mode: 0644
+    backup: "{{ logstash_yml.backup }}"
+  notify: restart logstash

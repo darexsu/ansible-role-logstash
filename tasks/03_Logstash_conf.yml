@@ -1,0 +1,14 @@
+---
+- debug:
+    msg: "edit {{ logstash_conf[item.key]['file'] }}"
+
+- name: configure logstash_conf
+  ansible.builtin.template:
+    src: "{{ logstash_conf[item.key]['src'] }}"
+    dest: "/etc/logstash/conf.d/{{ logstash_conf[item.key]['file'] }}"
+    owner: root
+    group: root
+    mode: 0644
+    backup: "{{ logstash_conf[item.key]['backup'] }}"
+  notify: restart logstash
+  when: logstash_conf[item.key]['enabled'] and logstash_conf[item.key] is defined

@@ -1,0 +1,12 @@
+output {
+  elasticsearch {
+    hosts => {{ logstash[item.key]['host'] | default('["http://localhost:9200"]') }}
+    index => {{ logstash[item.key]['index'] | default('"%{[@metadata][beat]}-%{[@metadata][version]}-%{+YYYY.MM.dd}"') }}
+    {% if logstash[item.key]['user'] is defined -%}
+    user => "{{ logstash[item.key]['user'] }}"
+    {% endif -%}
+    {% if logstash[item.key]['password'] is defined -%}
+    password => "{{ logstash[item.key]['password'] }}"
+    {% endif -%}
+  }
+}

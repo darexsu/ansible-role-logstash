@@ -1,0 +1,5 @@
+input {
+  beats {
+    port => {{ logstash[item.key]['port'] | default("5044") }}
+  }
+}

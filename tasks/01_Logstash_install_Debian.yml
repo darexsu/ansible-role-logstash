@@ -1,0 +1,31 @@
+---
+- name: ensure dependencies are installed.
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  with_items: "{{ logstash_const[ansible_os_family]['dependencies'] }}"
+
+- name: add elastic.co repo
+  block:
+    - name: add elastic.co gpg key
+      ansible.builtin.apt_key:
+        url: "{{ logstash_const[ansible_os_family]['elastic']['gpg'] }}"
+        state: present
+
+    - name: add elastic.co repo
+      ansible.builtin.apt_repository:
+        repo: "{{ logstash_const[ansible_os_family]['elastic']['repo'] }}"
+        state: present
+  when: logstash.repo == "elastic"
+
+- name: install logstash
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  with_items: "{{ logstash_install['packages'] }}"
+
+- name: force systemd to reread configs
+  ansible.builtin.systemd:
+    daemon_reload: true

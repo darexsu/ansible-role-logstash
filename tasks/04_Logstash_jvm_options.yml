@@ -1,0 +1,11 @@
+---
+- name: configure logstash_jvm_options
+  ansible.builtin.template:
+    src: "{{ logstash_jvm_options.src }}"
+    dest: "/etc/logstash/{{ logstash_jvm_options.file }}"
+    owner: root
+    group: root
+    mode: 644
+    backup: "{{ logstash_jvm_options.backup }}"
+  notify: restart logstash
+  when: logstash_jvm_options.enabled

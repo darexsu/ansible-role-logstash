@@ -1,0 +1,54 @@
+---
+- name: merge dictionaries
+  block:
+    - include_vars:
+        file: ../../darexsu.logstash/defaults/main.yml
+        name: logstash_default_vars
+
+    - name: merge default and new dictionaries
+      set_fact:
+        "{{ item.key }}": "{{ logstash_default_vars[item.key] | combine(merge[item.key], recursive=True)}}"
+      when: logstash_default_vars[item.key] is defined
+      with_dict: "{{ merge }}"
+
+    - name: combine defaults vars with merge dictionary
+      set_fact:
+        merge: "{{ logstash_default_vars | combine(merge, recursive=True)}}"
+  when: merge is defined
+
+- name: logstash role is disabled
+  meta: end_play
+  when: not logstash.enabled
+
+- name: "-> 01_Logstash_install_{{ ansible_os_family }}.yml"
+  include_tasks: "./tasks/01_Logstash_install_{{ ansible_os_family }}.yml"
+  when: logstash_install.enabled
+
+- name: gather the package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: "-> 02_Logstash.yml"
+  include_tasks: "./tasks/02_Logstash.yml"
+  when: ("logstash") in ansible_facts.packages and logstash_yml.enabled
+
+- name: "-> 03_Logstash_conf.yml"
+  include_tasks: "./tasks/03_Logstash_conf.yml"
+  with_dict: "{{ logstash_conf }}"
+  when: ("logstash") in ansible_facts.packages
+
+- name: "-> 04_Logstash_jvm_options.yml"
+  include_tasks: "./tasks/04_Logstash_jvm_options.yml"
+  when: ("logstash") in ansible_facts.packages and logstash_jvm_options.enabled
+
+- name: include role firewalld
+  include_role:
+    name: darexsu.firewalld
+  when: firewalld.enabled
+
+- name: "ensure logstash is {{ logstash['service']['state'] }}"
+  ansible.builtin.service:
+    name: logstash
+    state: "{{ logstash['service']['state'] }}"
+    enabled: "{{ logstash['service']['enabled'] }}"
+  when: ("logstash") in ansible_facts.packages
