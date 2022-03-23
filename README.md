@@ -176,25 +176,25 @@ Your vars [host_vars]  -->  default vars [current role] --> default vars [includ
         file: "jvm.options"
         src: "jvm_options.j2"
         backup: false
-        data:
-          - "-Xms1g"
-          - "-Xmx1g"
-          - "11-13:-XX:+UseConcMarkSweepGC"
-          - "11-13:-XX:CMSInitiatingOccupancyFraction=75"
-          - "11-13:-XX:+UseCMSInitiatingOccupancyOnly"
-          - "-Djava.awt.headless=true"
-          - "-Dfile.encoding=UTF-8"
-          - "-Djruby.compile.invokedynamic=true"
-          - "-Djruby.jit.threshold=0"
-          - "-Djruby.regexp.interruptible=true"
-          - "-XX:+HeapDumpOnOutOfMemoryError"
-          - "-Djava.security.egd=file:/dev/urandom"
-          - "-Dlog4j2.isThreadContextMapInheritable=true"
-          - "11-:--add-opens=java.base/java.security=ALL-UNNAMED"
-          - "11-:--add-opens=java.base/java.io=ALL-UNNAMED"
-          - "11-:--add-opens=java.base/java.nio.channels=ALL-UNNAMED"
-          - "11-:--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"
-          - "11-:--add-opens=java.management/sun.management=ALL-UNNAMED"
+        data: |
+          -Xms1g
+          -Xmx1g
+          11-13:-XX:+UseConcMarkSweepGC
+          11-13:-XX:CMSInitiatingOccupancyFraction=75
+          11-13:-XX:+UseCMSInitiatingOccupancyOnly
+          -Djava.awt.headless=true
+          -Dfile.encoding=UTF-8
+          -Djruby.compile.invokedynamic=true
+          -Djruby.jit.threshold=0
+          -Djruby.regexp.interruptible=true
+          -XX:+HeapDumpOnOutOfMemoryError
+          -Djava.security.egd=file:/dev/urandom
+          -Dlog4j2.isThreadContextMapInheritable=true
+          11-:--add-opens=java.base/java.security=ALL-UNNAMED
+          11-:--add-opens=java.base/java.io=ALL-UNNAMED
+          11-:--add-opens=java.base/java.nio.channels=ALL-UNNAMED
+          11-:--add-opens=java.base/sun.nio.ch=ALL-UNNAMED
+          11-:--add-opens=java.management/sun.management=ALL-UNNAMED
 
   tasks:
     - name: role darexsu logstash
@@ -255,25 +255,25 @@ Your vars [host_vars]  -->  default vars [current role] --> default vars [includ
       file: "jvm.options"
       src: "jvm_options.j2"
       backup: false
-      data:
-        - "-Xms1g"
-        - "-Xmx1g"
-        - "11-13:-XX:+UseConcMarkSweepGC"
-        - "11-13:-XX:CMSInitiatingOccupancyFraction=75"
-        - "11-13:-XX:+UseCMSInitiatingOccupancyOnly"
-        - "-Djava.awt.headless=true"
-        - "-Dfile.encoding=UTF-8"
-        - "-Djruby.compile.invokedynamic=true"
-        - "-Djruby.jit.threshold=0"
-        - "-Djruby.regexp.interruptible=true"
-        - "-XX:+HeapDumpOnOutOfMemoryError"
-        - "-Djava.security.egd=file:/dev/urandom"
-        - "-Dlog4j2.isThreadContextMapInheritable=true"
-        - "11-:--add-opens=java.base/java.security=ALL-UNNAMED"
-        - "11-:--add-opens=java.base/java.io=ALL-UNNAMED"
-        - "11-:--add-opens=java.base/java.nio.channels=ALL-UNNAMED"
-        - "11-:--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"
-        - "11-:--add-opens=java.management/sun.management=ALL-UNNAMED"
+      data: |
+        -Xms1g
+        -Xmx1g
+        11-13:-XX:+UseConcMarkSweepGC
+        11-13:-XX:CMSInitiatingOccupancyFraction=75
+        11-13:-XX:+UseCMSInitiatingOccupancyOnly
+        -Djava.awt.headless=true
+        -Dfile.encoding=UTF-8
+        -Djruby.compile.invokedynamic=true
+        -Djruby.jit.threshold=0
+        -Djruby.regexp.interruptible=true
+        -XX:+HeapDumpOnOutOfMemoryError
+        -Djava.security.egd=file:/dev/urandom
+        -Dlog4j2.isThreadContextMapInheritable=true
+        11-:--add-opens=java.base/java.security=ALL-UNNAMED
+        11-:--add-opens=java.base/java.io=ALL-UNNAMED
+        11-:--add-opens=java.base/java.nio.channels=ALL-UNNAMED
+        11-:--add-opens=java.base/sun.nio.ch=ALL-UNNAMED
+        11-:--add-opens=java.management/sun.management=ALL-UNNAMED
 
     # FirewallD
     firewalld:
@@ -363,25 +363,25 @@ Your vars [host_vars]  -->  default vars [current role] --> default vars [includ
       file: "jvm.options"
       src: "jvm_options.j2"
       backup: false
-      data:
-        - "-Xms1g"
-        - "-Xmx1g"
-        - "11-13:-XX:+UseConcMarkSweepGC"
-        - "11-13:-XX:CMSInitiatingOccupancyFraction=75"
-        - "11-13:-XX:+UseCMSInitiatingOccupancyOnly"
-        - "-Djava.awt.headless=true"
-        - "-Dfile.encoding=UTF-8"
-        - "-Djruby.compile.invokedynamic=true"
-        - "-Djruby.jit.threshold=0"
-        - "-Djruby.regexp.interruptible=true"
-        - "-XX:+HeapDumpOnOutOfMemoryError"
-        - "-Djava.security.egd=file:/dev/urandom"
-        - "-Dlog4j2.isThreadContextMapInheritable=true"
-        - "11-:--add-opens=java.base/java.security=ALL-UNNAMED"
-        - "11-:--add-opens=java.base/java.io=ALL-UNNAMED"
-        - "11-:--add-opens=java.base/java.nio.channels=ALL-UNNAMED"
-        - "11-:--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"
-        - "11-:--add-opens=java.management/sun.management=ALL-UNNAMED"
+      data: |
+        -Xms1g
+        -Xmx1g
+        11-13:-XX:+UseConcMarkSweepGC
+        11-13:-XX:CMSInitiatingOccupancyFraction=75
+        11-13:-XX:+UseCMSInitiatingOccupancyOnly
+        -Djava.awt.headless=true
+        -Dfile.encoding=UTF-8
+        -Djruby.compile.invokedynamic=true
+        -Djruby.jit.threshold=0
+        -Djruby.regexp.interruptible=true
+        -XX:+HeapDumpOnOutOfMemoryError
+        -Djava.security.egd=file:/dev/urandom
+        -Dlog4j2.isThreadContextMapInheritable=true
+        11-:--add-opens=java.base/java.security=ALL-UNNAMED
+        11-:--add-opens=java.base/java.io=ALL-UNNAMED
+        11-:--add-opens=java.base/java.nio.channels=ALL-UNNAMED
+        11-:--add-opens=java.base/sun.nio.ch=ALL-UNNAMED
+        11-:--add-opens=java.management/sun.management=ALL-UNNAMED
 
   tasks:
     - name: role darexsu logstash
