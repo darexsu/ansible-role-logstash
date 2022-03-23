@@ -43,7 +43,7 @@ logstash_conf:
 #     user: 'elastic'
 #     password: 'changeme'
 
-# ElasticSearch -> config -> jvm.options
+# Logstash -> config -> jvm.options
 logstash_jvm_options:
   enabled: false
   file: "jvm.options"
