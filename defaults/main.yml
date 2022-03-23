@@ -19,7 +19,7 @@ logstash_yml:
   file: "logstash.yml"
   src: "logstash_yml.j2"
   backup: false
-  data:
+  data: |
     path.data: /var/lib/logstash
     path.logs: /var/log/logstash
 

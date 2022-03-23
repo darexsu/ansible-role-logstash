@@ -78,7 +78,7 @@ Your vars [host_vars]  -->  default vars [current role] --> default vars [includ
       # Logstash -> config -> logstash.yml
       logstash_yml:
         enabled: true
-        data:
+        data: |
           path.data: /var/lib/logstash
           path.logs: /var/log/logstash
       # Logstash -> config -> logstash.conf
@@ -148,7 +148,7 @@ Your vars [host_vars]  -->  default vars [current role] --> default vars [includ
         file: "logstash.yml"
         src: "logstash_yml.j2"
         backup: false
-        data:
+        data: |
           path.data: /var/lib/logstash
           path.logs: /var/log/logstash
       # Logstash -> config -> logstash.conf
@@ -227,7 +227,7 @@ Your vars [host_vars]  -->  default vars [current role] --> default vars [includ
       file: "logstash.yml"
       src: "logstash_yml.j2"
       backup: false
-      data:
+      data: |
         path.data: /var/lib/logstash
         path.logs: /var/log/logstash
     # Logstash -> config -> logstash.conf
@@ -335,7 +335,7 @@ Your vars [host_vars]  -->  default vars [current role] --> default vars [includ
       file: "logstash.yml"
       src: "logstash_yml.j2"
       backup: false
-      data:
+      data: |
         path.data: /var/lib/logstash
         path.logs: /var/log/logstash
     # Logstash -> config -> logstash.conf
