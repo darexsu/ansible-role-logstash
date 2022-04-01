@@ -10,12 +10,12 @@
   block:
     - name: add elastic.co gpg key
       ansible.builtin.apt_key:
-        url: "{{ logstash_const[ansible_os_family]['elastic']['gpg'] }}"
+        url: "{{ logstash_const[ansible_os_family]['elastic_gpg'] }}"
         state: present
 
     - name: add elastic.co repo
       ansible.builtin.apt_repository:
-        repo: "{{ logstash_const[ansible_os_family]['elastic']['repo'] }}"
+        repo: "{{ logstash_const[ansible_os_family]['elastic_repo'] }}"
         state: present
   when: logstash.repo == "elastic"
 
@@ -24,7 +24,7 @@
     name: "{{ item }}"
     state: present
     update_cache: true
-  with_items: "{{ logstash_install['packages'] }}"
+  with_items: "{{ logstash_const[ansible_os_family]['packages'] }}"
 
 - name: force systemd to reread configs
   ansible.builtin.systemd:

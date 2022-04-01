@@ -11,7 +11,6 @@ logstash:
 # Logstash -> install
 logstash_install:
   enabled: false
-  packages: ["logstash"]
 
 # Logstash -> config -> logstash.yml
 logstash_yml:
@@ -73,14 +72,14 @@ logstash_jvm_options:
 logstash_const:
   Debian:
     dependencies: [apt-transport-https, gnupg2, ca-certificates, openjdk-11-jdk]
-    elastic:
-      repo: "deb https://artifacts.elastic.co/packages/{{ logstash.version }}/apt stable main"
-      gpg: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+    elastic_repo: "deb https://artifacts.elastic.co/packages/{{ logstash.version }}/apt stable main"
+    elastic_gpg: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+    packages: ["logstash"]
   RedHat:
     dependencies: [gnupg2, java-11-openjdk]
-    elastic:
-      repo: "https://artifacts.elastic.co/packages/{{ logstash.version }}/yum"
-      gpg: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+    elastic_repo: "https://artifacts.elastic.co/packages/{{ logstash.version }}/yum"
+    elastic_gpg: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+    packages: ["logstash"]
 
 # FirewallD
 firewalld:

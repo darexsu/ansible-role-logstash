@@ -220,7 +220,6 @@ Your vars [host_vars]  -->  default vars [current role] --> default vars [includ
     # Logstash -> install
     logstash_install:
       enabled: true
-      packages: ["logstash"]
     # Logstash -> config -> logstash.yml
     logstash_yml:
       enabled: true
@@ -311,7 +310,6 @@ Your vars [host_vars]  -->  default vars [current role] --> default vars [includ
     # Logstash -> install
     logstash_install:
       enabled: true
-      packages: ["logstash"]
 
   tasks:
     - name: role darexsu logstash

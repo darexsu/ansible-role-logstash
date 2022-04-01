@@ -10,14 +10,14 @@
   block:
     - name: import elastic gpg key
       ansible.builtin.rpm_key:
-        key: "{{ logstash_const[ansible_os_family]['elastic']['gpg'] }}"
+        key: "{{ logstash_const[ansible_os_family]['elastic_gpg'] }}"
         state: present
 
     - name: add elasticsearch repository
       ansible.builtin.yum_repository:
         name: "elasticsearch"
         description: "Elastic repository"
-        baseurl: "{{ logstash_const[ansible_os_family]['elastic']['repo'] }}"
+        baseurl: "{{ logstash_const[ansible_os_family]['elastic_repo'] }}"
         gpgcheck: true
         enabled: true
         module_hotfixes: true
@@ -28,7 +28,7 @@
     name: "{{ item }}"
     state: present
     update_cache: true
-  with_items: "{{ logstash_install['packages'] }}"
+  with_items: "{{ logstash_const[ansible_os_family]['packages'] }}"
 
 - name: force systemd to reread configs
   ansible.builtin.systemd:
